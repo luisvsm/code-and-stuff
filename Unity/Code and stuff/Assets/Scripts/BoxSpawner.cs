@@ -1,8 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BoxSpawner : MonoBehaviour {
+public class BoxSpawner : ManagedMonoBehaviour {
+
 
 	// Use this for initialization
 	void Start () {
@@ -13,4 +15,22 @@ public class BoxSpawner : MonoBehaviour {
 	void Update () {
 		
 	}
+
+    void CheckIfGameHasStarted()
+    {
+
+
+        if (GameControllerScript.Instance.gameHasStarted)
+        {
+            Debug.Log("The game is on!");
+        }
+    }
+
+    public override void  Boot(Action returnCompletedAction)
+    {
+
+        GameControllerScript.Instance = new GameControllerScript();
+        returnCompletedAction();
+
+    }
 }
